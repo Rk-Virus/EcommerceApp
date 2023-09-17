@@ -7,7 +7,7 @@ import CustomerLayout from './Customer'
 
 const AllLayouts = () => {
     const [isLoading, setIsLoading] = useState(false)
-    const [user, setuser] = useState('customer')
+    const [user, setuser] = useState(false)
     return (
         <>
             {isLoading ?

@@ -12,7 +12,7 @@ import {
 import { TextInput, Surface, Text } from 'react-native-paper';
 // import PushNotification from 'react-native-push-notification';
 // import { useDispatch } from 'react-redux';
-// import { loginUser } from '../../Apis/commonApis';
+import { loginUser } from '../../Apis/commonApis';
 // import { SET_USER } from '../../Redux/Slices/userSlice';
 
 const LoginForm = props => {
@@ -28,19 +28,19 @@ const LoginForm = props => {
   };
 
 
-
+ // making user login
   const handleSubmit = async () => {
     // Alert.alert(`Welcome ${name}!`, 'You are being redirecting to Home Screen');
     try {
       if (!loginInfo.phoneNo || !loginInfo.password) {
         throw new Error('One or more fields required')
       }
-      // const res = await loginUser(loginInfo)
-      // if (res?.msg === 'success') {
-      //   // handleLoginNotification();
-      // } else {
-      //   throw new Error(res?.msg || 'Something went wrong')
-      // }
+      const res = await loginUser(loginInfo)
+      if (res?.msg === 'success') {
+        // handleLoginNotification();
+      } else {
+        throw new Error(res?.msg || 'Something went wrong')
+      }
     } catch (error) {
       Alert.alert("Error", error.message)
     }

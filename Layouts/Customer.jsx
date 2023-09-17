@@ -4,7 +4,7 @@ import BottomNavigation from '../components/BottomNavigation'
 // import EditProfile from '../Screens/EditProfile'
 import Home from '../Screens/Home'
 // import OrderHistory from '../Screens/Customer/OrderHistory'
-// import Profile from '../Screens/Profile'
+import Profile from '../Screens/Profile'
 // import Settings from '../Screens/Settings'
 // import ViewDetails from '../Screens/ViewDetails'
 // import OrderDetails from '../Screens/Customer/OrderDetails'
@@ -42,7 +42,7 @@ const Customer = () => {
             />
 
             {/*Profile Screen  */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Profile"
                 component={Profile}
                 options={{
@@ -54,7 +54,7 @@ const Customer = () => {
                     headerTitle: 'Profile',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
             {/* <Stack.Screen
                 name="Maps"
@@ -161,7 +161,7 @@ const Customer = () => {
                 }}
             /> */}
         </Stack.Navigator>
-        
+
         <BottomNavigation routes={routes} />
         </>
     )

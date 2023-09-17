@@ -6,7 +6,7 @@ import {
 import { TextInput, Card, Button } from 'react-native-paper';
 // import PushNotification from 'react-native-push-notification';
 // import auth from '@react-native-firebase/auth';
-// import { registerUser } from '../../../Apis/commonApis';
+import { registerUser } from '../../../Apis/commonApis';
 
 const SignupForm = props => {
   // sending userInfo
@@ -17,40 +17,42 @@ const SignupForm = props => {
   const [userInfo, setUserInfo] = useState({
     name: '',
     email: '',
-    phoneNo:'',
+    phoneNo: '',
     password: '',
     address: ''
   });
 
-//   useEffect(() => {
-//     auth()
-//         .signOut()
-//         .then(() => console.log('User signed out!'));
-// }, [])
+  //   useEffect(() => {
+  //     auth()
+  //         .signOut()
+  //         .then(() => console.log('User signed out!'));
+  // }, [])
 
   const handleChange = (fieldName, value) => {
     setUserInfo({ ...userInfo, [fieldName]: value });
   };
-  console.log(userInfo)
 
+  // registering user 
   const handleSubmit = async () => {
-    // try {
-    //   if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.address) {
-    //     throw new Error('One or more fields required')
-    //   }
-    //   setLoading(true)
-    //   const res = await registerUser(userInfo);
-    //   if (res?.msg === 'success') {
-    //     setLoading(false)
-    //     dispatch(SET_USER(res?.response))
-    //     handleRegisterNotification();
-    //   } else {
-    //     throw new Error(res?.msg || 'something went wrong')
-    //   }
-    // } catch (error) {
-    //   setLoading(false)
-    //   Alert.alert("Error", error.message)
-    // }
+    try {
+      if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.address) {
+        throw new Error('One or more fields required')
+      }
+      // console.log(userInfo)
+      setLoading(true)
+      const res = await registerUser(userInfo);
+
+      // console.log(res)
+      if (res?.msg === 'success') {
+        setLoading(false)
+        // handleRegisterNotification();
+      } else {
+        throw new Error(res?.msg || 'something went wrong')
+      }
+    } catch (error) {
+      setLoading(false)
+      Alert.alert("Error", error.message)
+    }
   };
 
   // local notifications
@@ -86,6 +88,7 @@ const SignupForm = props => {
             handleChange('name', val);
           }}
         />
+
         <TextInput
           mode='outlined'
           style={styles.inputField}
@@ -97,6 +100,19 @@ const SignupForm = props => {
             handleChange('email', val);
           }}
         />
+
+        <TextInput
+          mode='outlined'
+          style={styles.inputField}
+          placeholder="Your number Here..."
+          name="phoneNo"
+          label='Number'
+          value={userInfo?.phoneNo}
+          onChangeText={val => {
+            handleChange('phoneNo', val);
+          }}
+        />
+
         <TextInput
           mode='outlined'
           style={styles.inputField}
