@@ -1,18 +1,19 @@
 import React from 'react';
-import {StyleSheet, ScrollView, Text, Image, Button} from 'react-native';
+import { StyleSheet, ScrollView, Text, Image, Button } from 'react-native';
 import globalStyles from '../utils/global';
 
 //components,screen, other custom imports
 import AppBar from '../components/AppBar';
-import OffersSection from '../components/OffersSection';
+import OfferCard from '../components/OfferCard';
+// import OffersSection from '../components/OffersSection';
 
 const Home = props => {
-  
+
   return (
     <>
+      {/* appbar */}
       <AppBar homeNavs={props.navigation} />
       <ScrollView style={globalStyles.container}>
-        {/* appbar */}
 
         {/* Carousel or OverView Display */}
         <Image
@@ -22,7 +23,8 @@ const Home = props => {
 
         {/* OffersSection */}
         <Text style={styles.header}>Our Offers</Text>
-        <OffersSection />
+        {/* <OffersSection /> */}
+        <OfferCard/>
       </ScrollView>
     </>
   );

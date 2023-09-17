@@ -17,7 +17,7 @@ import { TextInput, Surface, Text } from 'react-native-paper';
 
 const LoginForm = props => {
   // login details
-//   const dispatch = useDispatch()
+  //   const dispatch = useDispatch()
   const [loginInfo, setLoginInfo] = useState({
     phoneNo: '',
     password: '',
@@ -27,11 +27,13 @@ const LoginForm = props => {
     setLoginInfo({ ...loginInfo, [fieldName]: value });
   };
 
+
+
   const handleSubmit = async () => {
     // Alert.alert(`Welcome ${name}!`, 'You are being redirecting to Home Screen');
     try {
       if (!loginInfo.phoneNo || !loginInfo.password) {
-        throw new Error ('One or more fields required')
+        throw new Error('One or more fields required')
       }
       // const res = await loginUser(loginInfo)
       // if (res?.msg === 'success') {
@@ -39,34 +41,33 @@ const LoginForm = props => {
       // } else {
       //   throw new Error(res?.msg || 'Something went wrong')
       // }
-      // props.navigation.navigate('home')
     } catch (error) {
       Alert.alert("Error", error.message)
     }
   };
 
   // notification functions
-//   useEffect(() => {
-//     createChannels();
-//   }, []);
-//   const createChannels = () => {
-//     PushNotification.createChannel({
-//       channelId: 'login-01', // (required)
-//       channelName: 'Login Notification', // (required)
-//     });
-//     PushNotification.createChannel({
-//       channelId: 'login-02', // (required)
-//       channelName: 'App Updates', // (required)
-//     });
-//   };
+  //   useEffect(() => {
+  //     createChannels();
+  //   }, []);
+  //   const createChannels = () => {
+  //     PushNotification.createChannel({
+  //       channelId: 'login-01', // (required)
+  //       channelName: 'Login Notification', // (required)
+  //     });
+  //     PushNotification.createChannel({
+  //       channelId: 'login-02', // (required)
+  //       channelName: 'App Updates', // (required)
+  //     });
+  //   };
 
-//   const handleLoginNotification = item => {
-//     PushNotification.localNotification({
-//       channelId: 'login-01',
-//       title: 'Login Successful',
-//       message: 'Welcome back to yoourhelper App!',
-//     });
-//   };
+  //   const handleLoginNotification = item => {
+  //     PushNotification.localNotification({
+  //       channelId: 'login-01',
+  //       title: 'Login Successful',
+  //       message: 'Welcome back to yoourhelper App!',
+  //     });
+  //   };
 
 
   return (
@@ -104,20 +105,20 @@ const LoginForm = props => {
                 handleChange('password', val);
               }}
             />
-             <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate('ForgotPassword');
-                }}
-                activeOpacity={0.8}>
-                <Text style={{ marginBottom: -5, color: '#f44336', textAlign : 'center', marginTop : 10 }}>Forgot Password ?</Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate('ForgotPassword');
+              }}
+              activeOpacity={0.8}>
+              <Text style={{ marginBottom: -5, color: '#f44336', textAlign: 'center', marginTop: 10 }}>Forgot Password ?</Text>
+            </TouchableOpacity>
           </View>
 
           {/* submit button */}
           <View style={[styles.inputField, { alignSelf: 'center' }]}>
-            <Button title=" I'm In! " 
-            onPress={handleSubmit}
-             color="#f44336" />
+            <Button title=" I'm In! "
+              onPress={handleSubmit}
+              color="#f44336" />
           </View>
 
 
@@ -141,12 +142,12 @@ const LoginForm = props => {
 
 const styles = StyleSheet.create({
   surface: {
-    flex:1,
+    flex: 1,
     margin: 40,
-    padding:30,
+    padding: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop : 0,
+    paddingTop: 0,
   },
   formTitle: {
     width: '100%',
