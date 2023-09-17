@@ -6,25 +6,20 @@ import {
 import { TextInput, Card, Button } from 'react-native-paper';
 // import PushNotification from 'react-native-push-notification';
 // import auth from '@react-native-firebase/auth';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { selectFormData, SET_USER } from '../../../Redux/Slices/userSlice';
 // import { registerUser } from '../../../Apis/commonApis';
 
 const SignupForm = props => {
   // sending userInfo
-//   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-//   const {phoneNo} = useSelector(selectFormData)
-//   console.log({phoneNo})
+  // const {phoneNo} = useSelector(selectFormData)
+  // console.log({phoneNo})
   // User details
   const [userInfo, setUserInfo] = useState({
     name: '',
     email: '',
-    // phoneNo,
+    phoneNo:'',
     password: '',
-    address: '',
-    joinedThruRefferal: null,
-    // isAgree: false
+    address: ''
   });
 
 //   useEffect(() => {
@@ -38,43 +33,43 @@ const SignupForm = props => {
   };
   console.log(userInfo)
 
-//   const handleSubmit = async () => {
-//     try {
-//       if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.address) {
-//         throw new Error('One or more fields required')
-//       }
-//       setLoading(true)
-//       const res = await registerUser(userInfo);
-//       if (res?.msg === 'success') {
-//         setLoading(false)
-//         dispatch(SET_USER(res?.response))
-//         handleRegisterNotification();
-//       } else {
-//         throw new Error(res?.msg || 'something went wrong')
-//       }
-//     } catch (error) {
-//       setLoading(false)
-//       Alert.alert("Error", error.message)
-//     }
-//   };
+  const handleSubmit = async () => {
+    // try {
+    //   if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.address) {
+    //     throw new Error('One or more fields required')
+    //   }
+    //   setLoading(true)
+    //   const res = await registerUser(userInfo);
+    //   if (res?.msg === 'success') {
+    //     setLoading(false)
+    //     dispatch(SET_USER(res?.response))
+    //     handleRegisterNotification();
+    //   } else {
+    //     throw new Error(res?.msg || 'something went wrong')
+    //   }
+    // } catch (error) {
+    //   setLoading(false)
+    //   Alert.alert("Error", error.message)
+    // }
+  };
 
   // local notifications
-//   useEffect(() => {
-//     createChannels();
-//   }, []);
-//   const createChannels = () => {
-//     PushNotification.createChannel({
-//       channelId: 'registered-01', // (required)
-//       channelName: 'Signup Notification', // (required)
-//     });
-//   };
-//   const handleRegisterNotification = item => {
-//     PushNotification.localNotification({
-//       channelId: 'registered-01',
-//       title: 'Sign up successful',
-//       message: 'Welcome to yoourhelper App!',
-//     });
-//   };
+  // useEffect(() => {
+  //   createChannels();
+  // }, []);
+  // const createChannels = () => {
+  //   PushNotification.createChannel({
+  //     channelId: 'registered-01', // (required)
+  //     channelName: 'Signup Notification', // (required)
+  //   });
+  // };
+  // const handleRegisterNotification = item => {
+  //   PushNotification.localNotification({
+  //     channelId: 'registered-01',
+  //     title: 'Sign up successful',
+  //     message: 'Welcome to yoourhelper App!',
+  //   });
+  // };
 
 
   return (
@@ -131,9 +126,9 @@ const SignupForm = props => {
       <Card.Actions style={{ paddingHorizontal: 10 }}>
         <Button
           mode='contained'
-        //   onPress={handleSubmit}
+          onPress={handleSubmit}
           style={styles.button}
-        //   loading={loading}
+          loading={loading}
         >
           Submit
         </Button>

@@ -27,23 +27,23 @@ const LoginForm = props => {
     setLoginInfo({ ...loginInfo, [fieldName]: value });
   };
 
-//   const handleSubmit = async () => {
-//     // Alert.alert(`Welcome ${name}!`, 'You are being redirecting to Home Screen');
-//     try {
-//       if (!loginInfo.phoneNo || !loginInfo.password) {
-//         throw new Error ('One or more fields required')
-//       }
-//       const res = await loginUser(loginInfo)
-//       if (res?.msg === 'success') {
-//         dispatch(SET_USER(res?.response))
-//         handleLoginNotification();
-//       } else {
-//         throw new Error(res?.msg || 'Something went wrong')
-//       }
-//     } catch (error) {
-//       Alert.alert("Error", error.message)
-//     }
-//   };
+  const handleSubmit = async () => {
+    // Alert.alert(`Welcome ${name}!`, 'You are being redirecting to Home Screen');
+    try {
+      if (!loginInfo.phoneNo || !loginInfo.password) {
+        throw new Error ('One or more fields required')
+      }
+      // const res = await loginUser(loginInfo)
+      // if (res?.msg === 'success') {
+      //   // handleLoginNotification();
+      // } else {
+      //   throw new Error(res?.msg || 'Something went wrong')
+      // }
+      // props.navigation.navigate('home')
+    } catch (error) {
+      Alert.alert("Error", error.message)
+    }
+  };
 
   // notification functions
 //   useEffect(() => {
@@ -116,7 +116,7 @@ const LoginForm = props => {
           {/* submit button */}
           <View style={[styles.inputField, { alignSelf: 'center' }]}>
             <Button title=" I'm In! " 
-            // onPress={handleSubmit}
+            onPress={handleSubmit}
              color="#f44336" />
           </View>
 

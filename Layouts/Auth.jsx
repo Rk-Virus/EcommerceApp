@@ -24,7 +24,7 @@ const Auth = () => {
                     }}
                 />
 
-                {/*Signup Screen  */}
+                {/* Signup Screen  */}
                 <Stack.Screen
                     name="Signup"
                     component={Signup}
@@ -38,6 +38,8 @@ const Auth = () => {
                         headerTitleAlign: 'left',
                     }}
                 />
+
+                {/* forgot password  */}
                 <Stack.Screen
                     name="ForgotPassword"
                     component={ForgotPassword}
