@@ -10,6 +10,8 @@ const OrderDetails = ({ route }) => {
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
 
+  const [offer, setOffer] = useState("")
+
   // useEffect(() => {
   //   if(loading){
   //     const fetchOrderDetails = async () => {

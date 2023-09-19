@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -11,13 +11,20 @@ import {
 } from 'react-native';
 import { TextInput, Surface, Text } from 'react-native-paper';
 // import PushNotification from 'react-native-push-notification';
-// import { useDispatch } from 'react-redux';
 import { loginUser } from '../../Apis/commonApis';
-// import { SET_USER } from '../../Redux/Slices/userSlice';
+
+//taking context
+import userContext from '../../utils/context';
+
 
 const LoginForm = props => {
+
+  const [loading, setLoading] = useState(false)
+
+  //taking global user state
+  const {setUser} = useContext(userContext)
+
   // login details
-  //   const dispatch = useDispatch()
   const [loginInfo, setLoginInfo] = useState({
     phoneNo: '',
     password: '',
@@ -30,14 +37,14 @@ const LoginForm = props => {
 
  // making user login
   const handleSubmit = async () => {
-    // Alert.alert(`Welcome ${name}!`, 'You are being redirecting to Home Screen');
     try {
       if (!loginInfo.phoneNo || !loginInfo.password) {
         throw new Error('One or more fields required')
       }
       const res = await loginUser(loginInfo)
-      if (res?.msg === 'success') {
-        // handleLoginNotification();
+      if (res?.msg === 'Success!') {
+        setUser(res?.response?.user);
+      // handleLoginNotification();
       } else {
         throw new Error(res?.msg || 'Something went wrong')
       }

@@ -9,10 +9,10 @@ import {
   ActivityIndicator,
 
 } from 'react-native-paper';
-import { getActiveOrders, getPreviousOrders } from '../../Apis/customerApis';
+// import { getActiveOrders, getPreviousOrders } from '../../Apis/customerApis';
 import OrderCard from '../../components/OrderCard';
 import { useNavigation } from '@react-navigation/native';
-import { formatDate, formatTime } from '../../utils/dateTimeUtils';
+// import { formatDate, formatTime } from '../../utils/dateTimeUtils';
 
 
 const OrderHistory = () => {
@@ -22,27 +22,27 @@ const OrderHistory = () => {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation()
 
-  useEffect(() => {
-    const fetchActiveOrders = async () => {
-      const resp = await getActiveOrders();
-      if (resp?.msg === "success") {
-        setOrders(resp?.response);
-        setLoading(false);
-      }
-    };
-    const fetchPreviousOrders = async () => {
-      const resp = await getPreviousOrders();
-      if (resp?.msg === "success") {
-        setOrders(resp?.response);
-        setLoading(false);
-      }
-    };
-    if (currentTab === 'previous') {
-      fetchPreviousOrders();
-    } else {
-      fetchActiveOrders();
-    }
-  }, [currentTab]);
+  // useEffect(() => {
+  //   const fetchActiveOrders = async () => {
+  //     const resp = await getActiveOrders();
+  //     if (resp?.msg === "success") {
+  //       setOrders(resp?.response);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   const fetchPreviousOrders = async () => {
+  //     const resp = await getPreviousOrders();
+  //     if (resp?.msg === "success") {
+  //       setOrders(resp?.response);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   if (currentTab === 'previous') {
+  //     fetchPreviousOrders();
+  //   } else {
+  //     fetchActiveOrders();
+  //   }
+  // }, [currentTab]);
 
   const handleToggle = (value) => {
     setLoading(true);

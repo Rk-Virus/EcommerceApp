@@ -19,7 +19,6 @@ const BottomNavigation = ({ routes }) => {
             activeOpacity={0.8}
             key={i}
             onPress={() => {
-              console.log("pressed!")
               navigation.navigate(route);
             }}
             style={styles.navTab}>

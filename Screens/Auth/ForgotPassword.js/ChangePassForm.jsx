@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Alert, StyleSheet, Text, View } from 'react-native'
 import { Button, Card, TextInput } from 'react-native-paper'
-// import { resetPassword } from '../../../Apis/commonApis'
+import { resetPassword } from '../../../Apis/commonApis'
 // import auth from '@react-native-firebase/auth';
 import { useEffect } from 'react'
 
@@ -11,6 +11,7 @@ const ChangePassForm = () => {
     const [password, setPassword] = useState('')
     const [cPassword, setCPassword] = useState('')
     // const { phoneNo } = useSelector(selectFormData)
+    const [phoneNo, setPhoneNo] = useState(1234567890)
     const [loading, setLoading] = useState(false)
 
     // useEffect(() => {
@@ -20,20 +21,20 @@ const ChangePassForm = () => {
     // }, [])
 
     const handleSubmit = async () => {
-        // try {
-        //     if (cPassword !== password) {
-        //         throw new Error('Password not matched')
-        //     }
-        //     setLoading(true)
-        //     const res = await resetPassword({ phoneNo, password })
-        //     if (res?.msg === 'success') {
-        //         Alert.alert('Password changed successfully')
-        //         setLoading(false)
-        //     }
-        // } catch (error) {
-        //     setLoading(false)
-        //     Alert.alert("Error", error.message)
-        // }
+        try {
+            if (cPassword !== password) {
+                throw new Error('Password not matched')
+            }
+            setLoading(true)
+            const res = await resetPassword({ phoneNo, password })
+            if (res?.msg === 'success') {
+                Alert.alert('Password changed successfully')
+                setLoading(false)
+            }
+        } catch (error) {
+            setLoading(false)
+            Alert.alert("Error", error.message)
+        }
     }
 
     return (

@@ -98,7 +98,6 @@ export const checkIfUserExist = async (body)=>{
 }
 
 export const resetPassword = async (body)=>{
-    
     const route = "/api/reset-password"
     const options = {
         method : "POST",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   StyleSheet,
   Alert,
@@ -7,12 +7,10 @@ import { TextInput, Card, Button } from 'react-native-paper';
 // import PushNotification from 'react-native-push-notification';
 // import auth from '@react-native-firebase/auth';
 import { registerUser } from '../../../Apis/commonApis';
+import userContext from '../../../utils/context'
 
 const SignupForm = props => {
-  // sending userInfo
   const [loading, setLoading] = useState(false)
-  // const {phoneNo} = useSelector(selectFormData)
-  // console.log({phoneNo})
   // User details
   const [userInfo, setUserInfo] = useState({
     name: '',
@@ -21,6 +19,9 @@ const SignupForm = props => {
     password: '',
     address: ''
   });
+
+  // fetching user from context
+  const {user, setUser} = useContext(userContext)
 
   //   useEffect(() => {
   //     auth()
@@ -38,13 +39,14 @@ const SignupForm = props => {
       if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.address) {
         throw new Error('One or more fields required')
       }
-      // console.log(userInfo)
+      console.log(user)
+
       setLoading(true)
       const res = await registerUser(userInfo);
 
-      // console.log(res)
-      if (res?.msg === 'success') {
+      if (res?.msg === 'Success!') {
         setLoading(false)
+        setUser(res?.response?.user);
         // handleRegisterNotification();
       } else {
         throw new Error(res?.msg || 'something went wrong')

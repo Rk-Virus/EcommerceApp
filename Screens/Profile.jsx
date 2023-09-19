@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   View,
@@ -19,9 +19,14 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 // import { redeemWallet } from '../Apis/customerApis';
 import defaultUserImg from '../assets/images/defaultUserImg.jpg'
+import userContext from '../utils/context';
 
 const Profile = () => {
   const navigation = useNavigation();
+
+  const [user, setUser] = useState("")
+  // const {user} = useContext(useContext)
+  console.log(user)
 
   const handleRedeem = async () => {
     // try {
@@ -39,8 +44,6 @@ const Profile = () => {
 
   }
 
-  const [user, setUser] = useState("")
-
   return (
     <ScrollView style={styles.container}>
       <View
@@ -49,6 +52,7 @@ const Profile = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
+
         <View style={styles.topInfo}>
           <Avatar.Image
             size={150}
@@ -59,6 +63,7 @@ const Profile = () => {
             <Caption style={styles.caption}>{user?.email}</Caption>
           </View>
         </View>
+
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <Icon name="pin" size={23} color="#f44336" />
@@ -67,6 +72,7 @@ const Profile = () => {
               {user?.address}
             </Text>
           </View>
+
           <View style={styles.row}>
             <Icon name="call" size={23} color="#f44336" />
             <Text style={{ alignSelf: 'center', marginLeft: 8 }}>
@@ -76,6 +82,7 @@ const Profile = () => {
           </View>
         </View>
       </View>
+
       {user?.userType === 'customer' && (
         <>
           <Divider />

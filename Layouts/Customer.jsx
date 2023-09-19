@@ -1,15 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import BottomNavigation from '../components/BottomNavigation'
-// import EditProfile from '../Screens/EditProfile'
+import EditProfile from '../Screens/EditProfile'
 import Home from '../Screens/Home'
-// import OrderHistory from '../Screens/Customer/OrderHistory'
+import OrderHistory from '../Screens/Customer/OrderHistory'
 import Profile from '../Screens/Profile'
-// import Settings from '../Screens/Settings'
-// import ViewDetails from '../Screens/ViewDetails'
-// import OrderDetails from '../Screens/Customer/OrderDetails'
-// import ConfirmOrder from '../Screens/Customer/ConfirmOrder'
-// import Maps from '../Screens/Employee/Maps'
+import Settings from '../Screens/Settings'
+import ViewDetails from '../Screens/ViewDetails'
+import OrderDetails from '../Screens/Customer/OrderDetails'
+import ConfirmOrder from '../Screens/Customer/ConfirmOrder'
+import Maps from '../Screens/Employee/Maps'
 
 const Customer = () => {
     const Stack = createNativeStackNavigator();
@@ -56,7 +56,8 @@ const Customer = () => {
                 }}
             />
 
-            {/* <Stack.Screen
+            {/* map screen  */}
+            <Stack.Screen
                 name="Maps"
                 component={Maps}
                 options={{
@@ -68,10 +69,10 @@ const Customer = () => {
                     headerTitle: 'Profile',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
             {/*Details Screen  */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Details"
                 component={ViewDetails}
                 options={{
@@ -83,11 +84,11 @@ const Customer = () => {
                     headerTitle: 'Details',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
             
             {/*Confirmation Screen  */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="ConfirmOrder"
                 component={ConfirmOrder}
                 options={{
@@ -99,10 +100,10 @@ const Customer = () => {
                     headerTitle: 'Check Order Details',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
             {/*EditProfile Screen  */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="EditProfile"
                 component={EditProfile}
                 options={{
@@ -114,10 +115,10 @@ const Customer = () => {
                     headerTitle: 'EditProfile',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
-            {/*Sttings Screen  */}
-            {/* <Stack.Screen
+            {/*Settings Screen  */}
+            <Stack.Screen
                 name="Settings"
                 component={Settings}
                 options={{
@@ -129,10 +130,10 @@ const Customer = () => {
                     headerTitle: 'Settings',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
             {/*OrderHistory Screen  */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="OrderHistory"
                 component={OrderHistory}
                 options={{
@@ -144,10 +145,10 @@ const Customer = () => {
                     headerTitle: 'Order History',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
 
             {/*OrderHistory Details Screen  */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="OrderDetails"
                 component={OrderDetails}
                 options={{
@@ -159,7 +160,7 @@ const Customer = () => {
                     headerTitle: 'Order Details',
                     headerTitleAlign: 'left',
                 }}
-            /> */}
+            />
         </Stack.Navigator>
 
         <BottomNavigation routes={routes} />
