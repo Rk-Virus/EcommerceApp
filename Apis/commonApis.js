@@ -97,6 +97,7 @@ export const checkIfUserExist = async (body)=>{
     return await fetchApi(route, options)
 }
 
+//----------- reset password ------------
 export const resetPassword = async (body)=>{
     const route = "/api/reset-password"
     const options = {
@@ -111,8 +112,6 @@ export const resetPassword = async (body)=>{
 }
 
 // ------------Image upload to S3-------------------------------------
-
-
 export const getUrls = async(body) => {
     const route = '/api/get-signed-url'
     const options = {

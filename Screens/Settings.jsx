@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, View, Alert, Linking} from 'react-native';
 import {
   Surface,
@@ -14,10 +14,14 @@ import {
   Switch,
 } from 'react-native-paper';
 
+import userContext from '../utils/context';
+
+
 const Settings = () => {
 
-  const [expanded, setExpanded] = useState(true);
+  const {user, setUser} = useContext(userContext)
 
+  const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 
   const [state, setState] = useState({ open: false });
@@ -41,14 +45,9 @@ const Settings = () => {
     <Surface style={styles.surface}>
       <Title style={styles.title}>User Settings</Title>
 
-     {/* <View style={{width:'100%', flexDirection:'row'}}>
-          <List.Item title="Notifications" style={{width:'78%'}}/>
-          <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-      </View> */}
-
       <List.Accordion title="Account Actions" id="3" style={{width: 500}}>
         <TouchableRipple
-          onPress={() => dispatch(LOGOUT())}
+          onPress={() => setUser(null)}
           rippleColor="rgba(0, 0, 0, .32)">
           <List.Item title="Log Out" />
         </TouchableRipple>

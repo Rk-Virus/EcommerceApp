@@ -5,7 +5,7 @@ import globalStyles from '../utils/global';
 //components,screen, other custom imports
 import AppBar from '../components/AppBar';
 import OfferCard from '../components/OfferCard';
-// import OffersSection from '../components/OffersSection';
+import OffersSection from '../components/OffersSection';
 
 const Home = props => {
 
@@ -23,8 +23,7 @@ const Home = props => {
 
         {/* OffersSection */}
         <Text style={styles.header}>Our Offers</Text>
-        {/* <OffersSection /> */}
-        <OfferCard/>
+        <OffersSection />
       </ScrollView>
     </>
   );
