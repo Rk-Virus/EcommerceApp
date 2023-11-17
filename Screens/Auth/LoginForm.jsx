@@ -3,26 +3,26 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Button,
-  Alert,
-  TouchableWithoutFeedback,
-  Keyboard,
+  Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-import { TextInput, Surface, Text } from 'react-native-paper';
-// import PushNotification from 'react-native-push-notification';
 import { loginUser } from '../../Apis/commonApis';
-
+import { TextInput, Card, Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 //taking context
 import userContext from '../../utils/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const LoginForm = props => {
 
-  const [loading, setLoading] = useState(false)
+  const navigation = useNavigation()
 
   //taking global user state
-  const {setUser} = useContext(userContext)
+  const { setUser, setJwtoken } = useContext(userContext)
+
+  const [loading, setLoading] = useState(false)
 
   // login details
   const [loginInfo, setLoginInfo] = useState({
@@ -30,154 +30,116 @@ const LoginForm = props => {
     password: '',
   });
 
+  // handling change
   const handleChange = (fieldName, value) => {
     setLoginInfo({ ...loginInfo, [fieldName]: value });
   };
 
 
- // making user login
+  // making user login
   const handleSubmit = async () => {
     try {
       if (!loginInfo.phoneNo || !loginInfo.password) {
         throw new Error('One or more fields required')
       }
-      const res = await loginUser(loginInfo)
-      if (res?.msg === 'Success!') {
-        setUser(res?.response?.user);
-      // handleLoginNotification();
+      setLoading(true)
+      console.log(loginInfo)
+      const data = await loginUser(loginInfo)
+      // console.log(data)
+
+      setLoading(false)
+      if (data?.msg === 'Success!') {
+        await AsyncStorage.setItem('user', JSON.stringify(data.response.user));
+        await AsyncStorage.setItem('jwtoken', data.response.token)
+
+        // setting global variables
+        setUser(data.response.user)
+        setJwtoken(data.response.token)
+        console.log(data?.msg, 'Login Successfull!');
       } else {
-        throw new Error(res?.msg || 'Something went wrong')
+        throw new Error(data?.msg || 'Something went wrong')
       }
     } catch (error) {
       Alert.alert("Error", error.message)
     }
   };
 
-  // notification functions
-  //   useEffect(() => {
-  //     createChannels();
-  //   }, []);
-  //   const createChannels = () => {
-  //     PushNotification.createChannel({
-  //       channelId: 'login-01', // (required)
-  //       channelName: 'Login Notification', // (required)
-  //     });
-  //     PushNotification.createChannel({
-  //       channelId: 'login-02', // (required)
-  //       channelName: 'App Updates', // (required)
-  //     });
-  //   };
-
-  //   const handleLoginNotification = item => {
-  //     PushNotification.localNotification({
-  //       channelId: 'login-01',
-  //       title: 'Login Successful',
-  //       message: 'Welcome back to yoourhelper App!',
-  //     });
-  //   };
-
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}>
-      <ScrollView>
-        {/* <Header/> */}
-        <Surface style={styles.surface} elevation={4}>
-          {/* <Text style={styles.formTitle}>Log In</Text> */}
+    <>
+      <ScrollView automaticallyAdjustKeyboardInsets={true}>
+        <Card style={styles.card}>
+          <Card.Content style={{ paddingHorizontal: 10 }} >
 
-          {/* textInputs */}
-          <View style={styles.inputField}>
-            <Text style={styles.lable}>User Number</Text>
+
             <TextInput
               mode='outlined'
-              placeholder="Your number here..."
-              keyboardType='number-pad'
+              style={styles.inputField}
+              placeholder="Your number Here..."
+              name="phoneNo"
+              label='Number'
               value={loginInfo?.phoneNo}
               onChangeText={val => {
                 handleChange('phoneNo', val);
               }}
             />
-          </View>
 
-          <View style={styles.inputField}>
-            <Text style={styles.lable}> Password</Text>
             <TextInput
               mode='outlined'
-              secureTextEntry={true}
+              style={styles.inputField}
+              secureTextEntry
               placeholder="Your password here..."
+              name="password"
+              label='Password'
               value={loginInfo?.password}
               onChangeText={val => {
                 handleChange('password', val);
               }}
             />
-            <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate('ForgotPassword');
-              }}
-              activeOpacity={0.8}>
-              <Text style={{ marginBottom: -5, color: '#f44336', textAlign: 'center', marginTop: 10 }}>Forgot Password ?</Text>
-            </TouchableOpacity>
-          </View>
 
-          {/* submit button */}
-          <View style={[styles.inputField, { alignSelf: 'center' }]}>
-            <Button title=" I'm In! "
+          </Card.Content>
+
+          <Card.Actions style={{ paddingHorizontal: 10 }}>
+            <Button
+              mode='contained'
               onPress={handleSubmit}
-              color="#f44336" />
-          </View>
-
-
-          <View style={{ marginTop: 20 }}>
-            <Text>
-              Don't have account?{" "}
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate('Signup');
-                }}
-                activeOpacity={0.8}>
-                <Text style={{ marginBottom: -5, color: '#f44336' }}>Register</Text>
-              </TouchableOpacity>
-            </Text>
-          </View>
-        </Surface>
+              style={styles.button}
+              loading={loading}
+            >
+              Submit
+            </Button>
+          </Card.Actions>
+        </Card>
       </ScrollView>
-    </TouchableWithoutFeedback>
+
+      <View style={{ marginVertical: 10 }}>
+        <Text style={{ textAlign: 'center' }}>Don't have account ?</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Signup');
+          }}
+          activeOpacity={0.8}>
+          <Text style={{ color: '#f44336', textAlign: 'center', padding: 10 }}>Register</Text>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  surface: {
-    flex: 1,
-    margin: 40,
-    padding: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 0,
-  },
-  formTitle: {
-    width: '100%',
-    fontSize: 30,
-    textAlign: 'center',
-    padding: 25,
-    backgroundColor: '#ffffff',
-  },
   inputField: {
+    marginBottom: 20,
+  },
+  card: {
+    padding: 10,
+    elevation: 4,
     width: '100%',
-    justifyContent: 'space-around',
-    flexDirection: 'column',
-    // alignItems: 'center',
-    marginTop: 40,
-    alignSelf: 'flex-start',
+    paddingTop: 150
   },
-  lable: {
-    fontSize: 20,
-    color: '#2d2e2e',
-  },
-  img: {
-    marginHorizontal: 270,
-  },
+  button: {
+    width: '100%',
+    marginBottom: 10
+  }
 });
 
 export default LoginForm;

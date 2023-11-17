@@ -1,7 +1,7 @@
 import { PaperProvider, Text } from 'react-native-paper';
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AllLayouts from './Layouts/Index';
+import AllLayouts from './Layouts/DecideStack';
 import {ContextProvider} from './utils/context'
 
 const App = () => {

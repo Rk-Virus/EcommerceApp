@@ -15,11 +15,12 @@ import {
 } from 'react-native-paper';
 
 import userContext from '../utils/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Settings = () => {
 
-  const {user, setUser} = useContext(userContext)
+  const {setUser, setJwtoken} = useContext(userContext)
 
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
@@ -40,6 +41,11 @@ const Settings = () => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
+  // handling logout
+  const handleLogout = async () =>{
+    await AsyncStorage.clear()
+    setUser(null); setJwtoken("");
+  }
 
   return (
     <Surface style={styles.surface}>
@@ -47,7 +53,7 @@ const Settings = () => {
 
       <List.Accordion title="Account Actions" id="3" style={{width: 500}}>
         <TouchableRipple
-          onPress={() => setUser(null)}
+          onPress={() => handleLogout()}
           rippleColor="rgba(0, 0, 0, .32)">
           <List.Item title="Log Out" />
         </TouchableRipple>

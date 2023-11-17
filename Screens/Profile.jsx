@@ -17,32 +17,15 @@ import {
   Button
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import { redeemWallet } from '../Apis/customerApis';
 import defaultUserImg from '../assets/images/defaultUserImg.jpg'
 import userContext from '../utils/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = () => {
   const navigation = useNavigation();
 
-  const [user, setUser] = useState("")
-  // const {user} = useContext(useContext)
+  const {user} = useContext(userContext)
   console.log(user)
-
-  const handleRedeem = async () => {
-    // try {
-    //   const res = await redeemWallet()
-    //   console.log('redeem ', res)
-    //   if (res?.msg === 'success') {
-    //     Linking.openURL(res?.response)
-    //   } else {
-    //     throw new Error(res?.msg || 'Something went wrong')
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    //   Alert.alert('Error', error.message)
-    // }
-
-  }
 
   return (
     <ScrollView style={styles.container}>
@@ -82,23 +65,6 @@ const Profile = () => {
           </View>
         </View>
       </View>
-
-      {user?.userType === 'customer' && (
-        <>
-          <Divider />
-          <View style={styles.infoBoxWrapper}>
-            <View style={styles.infoBox}>
-              <Title><Icon name="wallet" size={23} color="#f44336" /> Wallet</Title>
-              <Caption style={styles.caption}> {user?.refferalCount} Rs</Caption>
-            </View>
-            <Button
-              mode='contained'
-              onPress={handleRedeem}
-            >Redeem Money
-            </Button>
-          </View>
-        </>
-      )}
 
       <View style={styles.menuWrapper}>
         <TouchableRipple

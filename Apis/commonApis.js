@@ -2,24 +2,9 @@ import { fetchApi } from "../utils/fetchApi"
 // import SyncStorage from 'sync-storage';
 
 // let token =  SyncStorage.get('token')
-// ------------fetch user-------------------------------------
-
-// export const fetchUser = async ()=>{
-//     console.log('token',token)
-//     const route = "/api/fetch-user"
-//     const options = {
-//         method : "GET",
-//         headers : {
-//             authorization : `token ${token}`
-//         },
-//     }
-
-//     return await fetchApi(route, options)
-// }
 
 // ------------login user-------------------------------------
 export const loginUser = async (body)=>{
-    
     const route = "/api/login"
     const options = {
         method : "POST",
